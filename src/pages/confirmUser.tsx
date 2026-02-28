@@ -4,11 +4,17 @@ import RedirectLink from '../components/utils/RedirectLink'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { confirmUser } from '../services/auth';
 
-const ConfirmUser = () => {
+export interface ConfirmUserProps {
+    email: string;
+    confirmationType: string;
+}
+
+const ConfirmUser = ({ confirmationType }: ConfirmUserProps) => {
     const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
+    const [password, setPassword] = useState("");
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -44,8 +50,9 @@ const ConfirmUser = () => {
                 return;
             }
 
-            await confirmUser(email, code);
-            navigate('/dashboard');
+            await confirmUser(email, code, password);
+            const redirectLocation = confirmationType === "forgot-password" ? '/dashboard' : "/login";
+            navigate(redirectLocation);
 
         } catch (err: unknown) {
             const message = err instanceof Error ? err.message : "Failed to verify otp";
@@ -94,17 +101,40 @@ const ConfirmUser = () => {
                                 value={digit}
                                 onChange={(e) => handleChange(e.target.value, index)}
                                 onKeyDown={(e) => handleKeyDown(e, index)}
-                                className="w-12 h-14 text-center text-lg font-semibold border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"
+                                className="w-12 h-14 text-center text-lg font-semibold border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1A2CA3] focus:border-[#1A2CA3] transition"
                             />
                         ))}
                     </div>
 
+                    {confirmationType === "forgot-password" && (
+                        <div className="my-4">
+                            <label
+                                htmlFor="newPassword"
+                                className="block text-sm font-medium text-slate-700 mb-1"
+                            >
+                                New Password
+                            </label>
+
+                            <input
+                                id="newPassword"
+                                type="password"
+                                name="password"
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="Enter your new password"
+                                className="w-full px-4 py-2 border border-slate-300 rounded-lg
+                 focus:outline-none focus:ring-2 focus:ring-[#1A2CA3]
+                 focus:border-[#1A2CA3] transition"
+                            />
+                        </div>
+                    )}
+
                     <button
                         onClick={handleVerify}
                         disabled={loading}
-                        className="w-full bg-sky-600 hover:bg-sky-700 text-white py-3 rounded-xl font-medium transition disabled:opacity-60"
+                        className="w-full bg-[#1A2CA3] text-white py-2.5 text-sm font-medium
+                                 hover:opacity-90 transition disabled:opacity-50"
                     >
-                        {loading ? "Verifying..." : "Verify Account"}
+                        {loading ? "Verifying..." : "Change Password"}
                     </button>
 
                     <div className="mt-6 text-center">

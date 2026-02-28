@@ -99,6 +99,9 @@ const Login = () => {
                            focus:ring-1 focus:ring-[#1A2CA3]"
                 placeholder="Enter your password"
               />
+              <div className="w-full py-3">
+                <a onClick={() => (navigate("/forgot-password-email"))} className="text-[#1A2CA3] no-underline float-right cursor-pointer">Reset Password</a>
+              </div>
             </div>
 
             <button

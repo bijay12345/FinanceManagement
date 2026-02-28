@@ -26,7 +26,7 @@ const Signup = () => {
                 setError("Passwords dont match");
             }
             await signUp(form.email, form.password);
-            navigate('/validate-otp', { state: { email: form.email } });
+            navigate('/signup-otp-verification', { state: { email: form.email } });
 
         } catch (err: unknown) {
             console.error(err)

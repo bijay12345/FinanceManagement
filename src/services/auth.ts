@@ -1,4 +1,4 @@
-import { ResendConfirmationCodeCommand } from "@aws-sdk/client-cognito-identity-provider";
+import { ConfirmForgotPasswordCommand, ForgotPasswordCommand, ResendConfirmationCodeCommand } from "@aws-sdk/client-cognito-identity-provider";
 import {
   CognitoIdentityProviderClient,
   SignUpCommand,
@@ -42,8 +42,11 @@ const signUp = async (email: string, password: string) => {
   }
 };
 
-const confirmUser = async (email: string, code: string) => {
+const confirmUser = async (email: string, code: string, password?: string,) => {
   try {
+    if (password) {
+      return await handlePasswordReset(email, code, password);
+    }
     const command = new ConfirmSignUpCommand({
       ClientId: clientId,
       Username: email,
@@ -99,6 +102,26 @@ export const resendCode = async (email: string) => {
   return await client.send(command);
 };
 
+const handlePasswordResetEmailNotification = async (email: string) => {
+  const command = new ForgotPasswordCommand({
+    ClientId: clientId,
+    Username: email
+  });
+
+  return await client.send(command);
+}
+
+const handlePasswordReset = async (email: string, code: string, password?: string) => {
+  const command = new ConfirmForgotPasswordCommand({
+    ClientId: clientId,
+    Username: email,
+    ConfirmationCode: code,
+    Password: password
+  })
+
+  return await client.send(command);
+}
+
 // const logout = async () => {
 //   return await signOut();
 // };
@@ -108,4 +131,4 @@ export const resendCode = async (email: string) => {
 //   return sesssion?.tokens?.idToken?.toString();
 // };
 
-export { signUp, login, confirmUser };
+export { signUp, login, confirmUser, handlePasswordReset, handlePasswordResetEmailNotification };
