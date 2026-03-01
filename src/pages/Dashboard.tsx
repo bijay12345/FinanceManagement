@@ -1,6 +1,7 @@
-import AppLayout from "../layouts/AppLayout";
+import AppLayout from "../components/layouts/AppLayout";
 
 const Dashboard = () => {
+
   return (
     <AppLayout>
       <div className="bg-white border border-slate-200 rounded-lg p-6">

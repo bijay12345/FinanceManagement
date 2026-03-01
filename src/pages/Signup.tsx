@@ -1,8 +1,8 @@
 import { useState, type ChangeEvent, type FormEvent } from "react"
 import AuthSidebar from "../components/AuthSidebar"
-import { signUp } from "../services/auth";
 import { useNavigate } from "react-router-dom";
 import RedirectLink from "../components/utils/RedirectLink";
+import { signUp } from "../features/auth/authApi";
 
 const Signup = () => {
     const [error, setError] = useState<string | null>(null);

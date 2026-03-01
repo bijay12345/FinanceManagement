@@ -2,7 +2,7 @@ import { useState, type ChangeEvent, type FormEvent } from "react"
 import AuthSidebar from "../components/AuthSidebar"
 import RedirectLink from "../components/utils/RedirectLink"
 import { useNavigate } from "react-router-dom";
-import { handlePasswordResetEmailNotification } from "../services/auth";
+import { handlePasswordResetEmailNotification } from "../features/auth/authApi";
 
 const ForgotPasswordEmail = () => {
     const [error, setError] = useState("");

@@ -1,4 +1,5 @@
-import AppLayout from "../layouts/AppLayout";
+import AppLayout from "../components/layouts/AppLayout";
+
 
 const Statistics = () => {
   return (
