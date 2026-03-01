@@ -78,20 +78,22 @@ const login = async (email: string, password: string) => {
       },
     });
 
-    return await client.send(command);
+    const result = await client.send(command);
+
+    return result;
+
+
   } catch (err: unknown) {
 
     if (err instanceof Error) {
       console.error("Error name:", err.name);
       console.error("Error message:", err.message);
-
       throw err;
     }
 
     throw new Error("Failed to signup");
   }
 };
-
 
 export const resendCode = async (email: string) => {
   const command = new ResendConfirmationCodeCommand({
@@ -121,14 +123,5 @@ const handlePasswordReset = async (email: string, code: string, password?: strin
 
   return await client.send(command);
 }
-
-// const logout = async () => {
-//   return await signOut();
-// };
-
-// const getToken = async () => {
-//   const sesssion = await fetchAuthSession();
-//   return sesssion?.tokens?.idToken?.toString();
-// };
 
 export { signUp, login, confirmUser, handlePasswordReset, handlePasswordResetEmailNotification };
