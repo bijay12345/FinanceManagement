@@ -6,7 +6,7 @@ import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import ForgotPasswordEmail from "../pages/ForgotPasswordEmail";
 import ForgotPasswordOtpConfirm from "../pages/forgotPasswordOtpConfirm";
-import SignupOtpVerification from "../pages/signupOtpVerification";
+import SignupOtpVerification from "../pages/SignupOtpVerification";
 
 const AppRoutes = () => {
   return (

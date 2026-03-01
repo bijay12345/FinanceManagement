@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import AuthSidebar from '../components/AuthSidebar'
 import RedirectLink from '../components/utils/RedirectLink'
 import { useLocation, useNavigate } from 'react-router-dom';
-import { confirmUser } from '../services/auth';
+import { confirmUser } from '../features/auth/authApi';
 
 export interface ConfirmUserProps {
     email: string;

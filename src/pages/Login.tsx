@@ -1,13 +1,16 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
-import { login } from "../services/auth";
 import { useNavigate } from "react-router-dom";
 import AuthSidebar from "../components/AuthSidebar";
 import RedirectLink from "../components/utils/RedirectLink";
+import { login } from "../features/auth/authApi";
+import { useAppDispatch } from "../app/hooks";
+import { loginSuccess } from "../features/auth/AuthSlice";
 
 const Login = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
+  const dispatch = useAppDispatch()
 
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +27,17 @@ const Login = () => {
     setLoading(true);
 
     try {
-      await login(form.email, form.password);
+      const data = await login(form.email, form.password);
+      dispatch(loginSuccess({
+        accessToken: data.AuthenticationResult?.AccessToken,
+        refreshToken: data.AuthenticationResult?.RefreshToken,
+        user: {
+          sub: '',
+          email: '',
+
+        },
+        isAuthenticated: data.AuthenticationResult?.AccessToken ? true : false
+      }));
       navigate('/dashboard');
     } catch (err: unknown) {
       console.error(err);
