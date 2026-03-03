@@ -3,6 +3,8 @@ import AuthSidebar from "../components/AuthSidebar"
 import RedirectLink from "../components/utils/RedirectLink"
 import { useNavigate } from "react-router-dom";
 import { handlePasswordResetEmailNotification } from "../features/auth/authApi";
+import Input from "../components/utils/Inputs/Input";
+import SubmitButton from "../components/utils/Buttons/SubmitButton";
 
 const ForgotPasswordEmail = () => {
     const [error, setError] = useState("");
@@ -57,33 +59,11 @@ const ForgotPasswordEmail = () => {
                     )}
 
                     <form onSubmit={handleSubmit} className="space-y-6">
+                        <Input inputType="email" name="email" value={form.email} onChange={handleChange}
+                            isRequired={true} placeholder="jhon@comnapy.com" labelRequired={true}
+                            lableText="Email Address" />
 
-                        <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-2">
-                                Email address
-                            </label>
-                            <input
-                                type="email"
-                                name="email"
-                                value={form.email}
-                                onChange={handleChange}
-                                required
-                                className="w-full border border-slate-300 px-3 py-2.5 text-sm 
-                                   focus:outline-none focus:border-[#1A2CA3]
-                                   focus:ring-1 focus:ring-[#1A2CA3]"
-                                placeholder="you@company.com"
-                            />
-                        </div>
-
-                        <button
-                            type="submit"
-                            disabled={loading}
-                            className="w-full bg-[#1A2CA3] text-white py-2.5 text-sm font-medium
-                                 hover:opacity-90 transition disabled:opacity-50"
-                        >
-                            {loading ? "Processing..." : "Reset password"}
-                        </button>
-
+                        <SubmitButton text={loading ? "Processing..." : "Reset password"} colorFormat="#1A2CA3" isDisabled={loading} />
                     </form>
 
                     <p className="pt-3">Go back</p>

@@ -8,7 +8,7 @@ type Props = {
 
 const AppLayout = ({ children }: Props) => {
   return (
-    <div className="h-screen flex bg-slate-50">
+    <div className="h-screen flex bg-white">
       <Sidebar />
 
       <div className="flex-1 flex flex-col overflow-hidden">
