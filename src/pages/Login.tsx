@@ -5,13 +5,14 @@ import RedirectLink from "../components/utils/RedirectLink";
 import { login } from "../features/auth/authApi";
 import { useAppDispatch } from "../app/hooks";
 import { loginSuccess } from "../features/auth/AuthSlice";
+import Input from "../components/utils/Inputs/Input";
+import SubmitButton from "../components/utils/Buttons/SubmitButton";
 
 const Login = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch()
-
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -78,53 +79,18 @@ const Login = () => {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
+            <Input inputType="email" name="email" value={form.email} onChange={handleChange}
+              isRequired={true} placeholder="jhon@comnapy.com" labelRequired={true}
+              lableText="Email Address" />
 
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">
-                Email address
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={form.email}
-                onChange={handleChange}
-                required
-                className="w-full border border-slate-300 px-3 py-2.5 text-sm 
-                           focus:outline-none focus:border-[#1A2CA3]
-                           focus:ring-1 focus:ring-[#1A2CA3]"
-                placeholder="you@company.com"
-              />
+            <Input inputType="password" name="password" value={form.password} onChange={handleChange} onFocus={() => setError(null)}
+              isRequired={true} placeholder="Enter your password" labelRequired={true} lableText="Password" />
+
+            <div className="w-full py-3">
+              <a onClick={() => (navigate("/forgot-password-email"))} className="text-[#1A2CA3] no-underline float-right cursor-pointer">Reset Password</a>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">
-                Password
-              </label>
-              <input
-                type="password"
-                name="password"
-                value={form.password}
-                onChange={handleChange}
-                onFocus={() => setError(null)}
-                required
-                className="w-full border border-slate-300 px-3 py-2.5 text-sm 
-                           focus:outline-none focus:border-[#1A2CA3]
-                           focus:ring-1 focus:ring-[#1A2CA3]"
-                placeholder="Enter your password"
-              />
-              <div className="w-full py-3">
-                <a onClick={() => (navigate("/forgot-password-email"))} className="text-[#1A2CA3] no-underline float-right cursor-pointer">Reset Password</a>
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-[#1A2CA3] text-white py-2.5 text-sm font-medium
-                         hover:opacity-90 transition disabled:opacity-50"
-            >
-              {loading ? "Signing in..." : "Sign in"}
-            </button>
+            <SubmitButton text={loading ? "Signing in..." : "Sign in"} colorFormat="#1A2CA3" isDisabled={loading} />
 
           </form>
 

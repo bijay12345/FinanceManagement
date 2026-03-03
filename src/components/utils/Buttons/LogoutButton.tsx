@@ -1,19 +1,21 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../../app/hooks";
+import { logout } from "../../../features/auth/AuthSlice";
+import SubmitButton from "./SubmitButton";
 
-type ButtonProp = {
-  to: string;
-};
-
-const LogoutButton = ({ to }: ButtonProp) => {
+const LogoutButton = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const logoutUser = () => {
+    dispatch(logout());
+    navigate('/login');
+  }
   return (
-    <Link
-      to={to}
-      className="px-4 py-2 text-sm font-medium rounded-md 
-                    bg-[#f12424] text-white 
-                    hover:opacity-90 transition inline-block"
-    >
-      Logout
-    </Link>
+    <>
+      <div onClick={logoutUser}>
+        <SubmitButton text="Logout" colorFormat="#f12424" />
+      </div>
+    </>
   );
 };
 
