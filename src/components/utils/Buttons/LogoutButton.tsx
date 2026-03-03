@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../app/hooks";
 import { logout } from "../../../features/auth/AuthSlice";
-import SubmitButton from "./SubmitButton";
+import AppFeatureButton from "./AppFeatureButton";
 
 const LogoutButton = () => {
   const dispatch = useAppDispatch();
@@ -12,9 +12,7 @@ const LogoutButton = () => {
   }
   return (
     <>
-      <div onClick={logoutUser}>
-        <SubmitButton text="Logout" colorFormat="#f12424" />
-      </div>
+      <AppFeatureButton text="Logout" colorFormat="#f12424" onClick={logoutUser} />
     </>
   );
 };
