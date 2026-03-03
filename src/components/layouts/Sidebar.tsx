@@ -1,9 +1,13 @@
 import { NavLink } from "react-router-dom";
+import RedirectLink from "../utils/RedirectLink";
+
+interface NavItemProps { to: string; label: string }
 
 const Sidebar = () => {
   return (
     <aside className="w-64 bg-white border-r border-slate-200 flex flex-col">
-      <div className="px-6 py-6 border-b border-slate-200">
+      <div className="px-6 py-6">
+        <RedirectLink text="BudgetFlow" to="/dashboard" textSize="xl" />
         <h1 className="text-xl font-semibold text-slate-800">BudgetFlow</h1>
       </div>
 
@@ -16,7 +20,7 @@ const Sidebar = () => {
   );
 };
 
-const NavItem = ({ to, label }: { to: string; label: string }) => {
+const NavItem = ({ to, label }: NavItemProps) => {
   return (
     <NavLink
       to={to}
