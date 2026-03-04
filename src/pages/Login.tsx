@@ -85,9 +85,8 @@ const Login = () => {
 
             <Input inputType="password" name="password" value={form.password} onChange={handleChange} onFocus={() => setError(null)}
               isRequired={true} placeholder="Enter your password" labelRequired={true} lableText="Password" />
-
-            <div className="w-full py-3">
-              <a onClick={() => (navigate("/forgot-password-email"))} className="text-[#1A2CA3] no-underline float-right cursor-pointer">Reset Password</a>
+            <div className="mb-3 float-right">
+              <RedirectLink to="/forgot-password-email" text="Reset Password" />
             </div>
 
             <SubmitButton text={loading ? "Signing in..." : "Sign in"} colorFormat="#1A2CA3" isDisabled={loading} />

@@ -1,4 +1,4 @@
-import { ConfirmForgotPasswordCommand, ForgotPasswordCommand, ResendConfirmationCodeCommand, type InitiateAuthCommandOutput } from "@aws-sdk/client-cognito-identity-provider";
+import { ConfirmForgotPasswordCommand, ForgotPasswordCommand, ResendConfirmationCodeCommand, type AuthenticationResultType, type InitiateAuthCommandOutput } from "@aws-sdk/client-cognito-identity-provider";
 import {
     CognitoIdentityProviderClient,
     SignUpCommand,
@@ -119,4 +119,20 @@ const handlePasswordReset = async (email: string, code: string, password?: strin
     return await client.send(command);
 }
 
-export { signUp, login, confirmUser, handlePasswordReset, handlePasswordResetEmailNotification };
+const refreshAuthToken = async (refreshToken: string): Promise<AuthenticationResultType> => {
+    const command = new InitiateAuthCommand({
+        AuthFlow: "REFRESH_TOKEN_AUTH",
+        ClientId: clientId,
+        AuthParameters: {
+            REFRESH_TOKEN: refreshToken,
+        }
+    });
+
+    const response = await client.send(command);
+    if (!response.AuthenticationResult) {
+        throw new Error("Token refresh failed");
+    }
+    return response.AuthenticationResult;
+}
+
+export { signUp, login, confirmUser, handlePasswordReset, handlePasswordResetEmailNotification, refreshAuthToken };

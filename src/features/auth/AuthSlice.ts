@@ -29,20 +29,25 @@ const authSlice = createSlice({
             action: PayloadAction<{
                 accessToken?: string;
                 refreshToken?: string;
-                user: User;
+                user?: User;
                 isAuthenticated: boolean;
             }>
         ) => {
             state.accessToken = action.payload?.accessToken ? action.payload?.accessToken : null;
             state.refreshToken = action.payload?.refreshToken ? action.payload?.refreshToken : null;
-            state.user = action.payload.user;
+            state.user = action.payload.user ?? null;
             state.isAuthenticated = action.payload.isAuthenticated;
+            if (action.payload.refreshToken) {
+                localStorage.setItem("refreshToken", action.payload.refreshToken);
+            }
         },
+
         logout: (state) => {
             state.accessToken = null;
             state.refreshToken = null;
             state.user = null;
             state.isAuthenticated = false;
+            localStorage.setItem("refreshToken", "");
         }
     }
 });
