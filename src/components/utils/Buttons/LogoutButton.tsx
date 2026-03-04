@@ -12,7 +12,7 @@ const LogoutButton = () => {
   }
   return (
     <>
-      <AppFeatureButton text="Logout" colorFormat="#f12424" onClick={logoutUser} />
+      <AppFeatureButton text="Logout" customClasses="bg-red-600 text-white" onClick={logoutUser} />
     </>
   );
 };

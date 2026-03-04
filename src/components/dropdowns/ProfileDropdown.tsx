@@ -21,11 +21,10 @@ const ProfileDropdown: React.FC = () => {
 
     return (
         <div className="relative" ref={dropdownRef}>
-
             <div
                 onClick={() => setOpen((prev) => !prev)}
-                className="w-9 h-9 rounded-full bg-slate-300 cursor-pointer"
-            />
+                className="w-9 h-9 rounded-full bg-orange-700 cursor-pointer text-white"
+            ><p className="text-center w-full min-h-max text-[23px] font-semibold">A</p></div>
 
             {open && (
                 <div className="absolute right-0 mt-3 w-48 

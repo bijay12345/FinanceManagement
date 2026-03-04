@@ -1,19 +1,18 @@
-import { useDispatch } from "react-redux";
-import AppRoutes from "./routes/app.routes";
 import { useEffect } from "react";
-import { logout, setAccessToken } from "./features/auth/AuthSlice";
-import { refreshAuthToken } from "./features/auth/authApi";
+import { useAppDispatch } from "./app/hooks";
+import AppRoutes from "./routes/app.routes";
+import { loginSuccess, logout } from "./features/auth/AuthSlice";
 
 function App() {
-  const dispatch = useDispatch();
+
+  const dispatch = useAppDispatch();
   const refreshToken = localStorage.getItem("refreshToken");
 
   useEffect(() => {
     const restoreSession = async () => {
-      if (!refreshToken) return;
       try {
-        const result = await refreshAuthToken(refreshToken);
-        dispatch(setAccessToken({ accessToken: result.AccessToken ?? "" }));
+        if (!refreshToken) throw new Error("Refresh token not found");
+        dispatch(loginSuccess({ isAuthenticated: true, refreshToken: refreshToken }));
       } catch (err: unknown) {
         console.log(err)
         dispatch(logout());
@@ -21,7 +20,6 @@ function App() {
     };
     restoreSession();
   }, []);
-
   return <AppRoutes />;
 }
 
