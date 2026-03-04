@@ -7,7 +7,7 @@ interface NavItemProps { to: string; label: string, icon?: ReactNode }
 
 const Sidebar = () => {
   return (
-    <aside className="w-64 bg-white border-r border-slate-200 flex flex-col">
+    <aside className="w-64 bg-white shadow-[4px_0_12px_rgba(0,0,0,0.05)] flex flex-col">
       <div className="px-6 pb-6">
         <Logo />
       </div>
@@ -15,7 +15,6 @@ const Sidebar = () => {
       <nav className="flex-1 px-4 py-6 space-y-2">
         <NavItem to="/dashboard" label="Dashboard" icon={<Home size={20} />} />
         <NavItem to="/statistics" label="Statistics" icon={<ChartColumnDecreasing size={20} />} />
-
       </nav>
     </aside>
   );

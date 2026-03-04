@@ -1,15 +1,16 @@
+import { Receipt, Factory, Wallet, CircleDollarSign } from "lucide-react";
 import AppLayout from "../components/layouts/AppLayout";
+import TopInfoBox from "../components/utils/dashboard/TopInfoBox";
 
 const Dashboard = () => {
 
   return (
     <AppLayout>
-      <div className="bg-white border border-slate-200 rounded-lg p-6">
-        <h1 className="text-xl font-semibold text-slate-800 mb-2">Dashboard</h1>
-
-        <p className="text-sm text-slate-500">
-          Overview of your monthly financial performance.
-        </p>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <TopInfoBox title="Total Sale" value="₹50,000" icon={<Receipt size={30} />} iconBg="bg-blue-100" iconTextColor="text-blue-600" />
+        <TopInfoBox title="Total Production" value="₹30,000" icon={<Factory size={30} />} iconBg="bg-yellow-100" iconTextColor="text-yellow-600" />
+        <TopInfoBox title="Total Expense" value="₹20,000" icon={<Wallet size={30} />} iconBg="bg-red-100" iconTextColor="text-red-600" />
+        <TopInfoBox title="Total Income" value="₹20,000" icon={<CircleDollarSign size={30} />} iconBg="bg-green-100" iconTextColor="text-green-600" />
       </div>
     </AppLayout>
   );
