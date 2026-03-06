@@ -1,5 +1,5 @@
 import React from "react";
-import { PlusCircle, DollarSign, ClipboardList } from "lucide-react";
+import { PlusCircle, DollarSign } from "lucide-react";
 
 const actions = [
     {
@@ -14,29 +14,27 @@ const actions = [
         bg: "bg-green-100",
         text: "text-green-600",
     },
-    {
-        label: "Add Task",
-        icon: <ClipboardList size={18} />,
-        bg: "bg-blue-100",
-        text: "text-blue-600",
-    },
 ];
 
 const QuickAction = () => {
     return (
-        <div className="bg-white rounded-xl shadow-md p-5 w-full">
-            <h2 className="text-lg font-semibold text-gray-800 mb-4">
-                Quick Actions
-            </h2>
+        <div className="mb-6">
 
-            <div className="space-y-3">
+            <div className="flex flex-wrap gap-3 mt-3">
                 {actions.map((action, index) => (
                     <button
                         key={index}
-                        className="flex items-center gap-3 w-full text-left p-3 rounded-lg hover:bg-gray-50 transition"
+                        className="flex items-center gap-3 px-4 py-2.5
+                bg-white/70 backdrop-blur-sm
+                border border-gray-200
+                rounded-lg
+                hover:bg-white hover:shadow-sm
+                transition-all duration-200
+                cursor-pointer"
                     >
                         <div
-                            className={`w-8 h-8 flex items-center justify-center rounded-lg ${action.bg} ${action.text}`}
+                            className={`w-8 h-8 flex items-center justify-center rounded-md
+                    ${action.bg} ${action.text}`}
                         >
                             {action.icon}
                         </div>
@@ -47,6 +45,7 @@ const QuickAction = () => {
                     </button>
                 ))}
             </div>
+
         </div>
     );
 };

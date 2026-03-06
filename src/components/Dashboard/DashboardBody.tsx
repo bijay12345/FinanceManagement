@@ -1,55 +1,26 @@
-import ExpenseBreakdown from "./ExpenseBreakdown"
-import LivestockCard from "./LivestockCard"
-import LowStockAlerts from "./LowStockAlerts"
-import MonthlyProfit from "./MonthlyProfit"
 import ProductionToday from "./ProductionToday"
-import QuickAction from "./QuickAction"
-import RecentTransactions from "./RecentTransaction"
-import SalesOverview from "./SalesOverview"
+import RecentActivities from "./RecentActivities"
 import TasksToday from "./TaskToday"
 import WeatherCard from "./WeatherCard"
+
 
 const DashboardBody = () => {
     return (
         <>
-            <div className="max-w-8xl mx-auto px-4 py-6 grid grid-cols-12 gap-6">
+            <div className="space-y-6 mt-3">
 
-                {/* LEFT COLUMN */}
-                <div className="col-span-12 xl:col-span-6 space-y-6">
-
-                    <div className="grid md:grid-cols-2 gap-6">
-                        <ProductionToday />
-                        <ExpenseBreakdown />
-                    </div>
-
-                    <SalesOverview />
-
-                    <RecentTransactions />
-
-                </div>
-
-
-                {/* MIDDLE COLUMN */}
-                <div className="col-span-12 xl:col-span-3 space-y-6">
-
+                {/* Top Section */}
+                <div className="grid md:grid-cols-2 gap-6">
+                    <RecentActivities />
                     <TasksToday />
-
-                    <LowStockAlerts />
-
-                    <WeatherCard />
-
                 </div>
 
+                {/* Middle Stats */}
+                <ProductionToday />
 
-                {/* RIGHT COLUMN */}
-                <div className="col-span-12 xl:col-span-3 space-y-6">
-
-                    <MonthlyProfit />
-
-                    <LivestockCard />
-
-                    <QuickAction />
-
+                {/* Bottom Section */}
+                <div className="grid md:grid-cols-2 gap-6">
+                    <WeatherCard />
                 </div>
 
             </div>

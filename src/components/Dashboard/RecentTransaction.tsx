@@ -1,58 +1,105 @@
 import React from "react";
+import { ArrowUpRight, ArrowDownLeft } from "lucide-react";
 
 const transactions = [
     {
         date: "Today",
-        type: "Feed",
-        amount: "₹1,200",
+        type: "Feed Purchase",
+        amount: 1200,
+        category: "expense",
     },
     {
         date: "Today",
         type: "Milk Sale",
-        amount: "₹3,000",
+        amount: 3000,
+        category: "income",
     },
     {
         date: "Yesterday",
         type: "Medicine",
-        amount: "₹500",
+        amount: 500,
+        category: "expense",
     },
     {
         date: "Yesterday",
-        type: "Eggs Sale",
-        amount: "₹2,200",
+        type: "Egg Sale",
+        amount: 2200,
+        category: "income",
     },
 ];
 
 const RecentTransactions = () => {
     return (
-        <div className="bg-white rounded-xl shadow-md p-5 w-full">
-            <h2 className="text-lg font-semibold text-gray-800 mb-4">
-                Recent Transactions
-            </h2>
+        <div className="bg-white border border-slate-200 rounded-xl shadow-sm p-5">
 
-            <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                    <thead>
-                        <tr className="text-gray-500 text-left border-b">
-                            <th className="pb-2 font-medium">Date</th>
-                            <th className="pb-2 font-medium">Type</th>
-                            <th className="pb-2 font-medium text-right">Amount</th>
-                        </tr>
-                    </thead>
+            {/* Header */}
+            <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-semibold text-slate-800">
+                    Recent Transactions
+                </h2>
 
-                    <tbody className="text-gray-700">
-                        {transactions.map((item, index) => (
-                            <tr key={index} className="border-b last:border-none">
-                                <td className="py-2">{item.date}</td>
-                                <td className="py-2">{item.type}</td>
-                                <td className="py-2 text-right font-medium">
-                                    {item.amount}
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                <button className="text-sm text-blue-600 hover:underline">
+                    View All
+                </button>
             </div>
+
+            {/* Transaction List */}
+            <div className="space-y-3">
+
+                {transactions.map((item, index) => {
+
+                    const isIncome = item.category === "income";
+
+                    return (
+                        <div
+                            key={index}
+                            className="flex items-center justify-between p-3 rounded-lg hover:bg-slate-50 transition"
+                        >
+
+                            {/* Left Section */}
+                            <div className="flex items-center gap-3">
+
+                                <div
+                                    className={`p-2 rounded-lg ${isIncome
+                                            ? "bg-green-100 text-green-600"
+                                            : "bg-red-100 text-red-600"
+                                        }`}
+                                >
+                                    {isIncome ? (
+                                        <ArrowDownLeft size={16} />
+                                    ) : (
+                                        <ArrowUpRight size={16} />
+                                    )}
+                                </div>
+
+                                <div>
+                                    <p className="text-sm font-medium text-slate-700">
+                                        {item.type}
+                                    </p>
+
+                                    <p className="text-xs text-slate-400">
+                                        {item.date}
+                                    </p>
+                                </div>
+
+                            </div>
+
+                            {/* Amount */}
+                            <p
+                                className={`text-sm font-semibold ${isIncome
+                                        ? "text-green-600"
+                                        : "text-red-600"
+                                    }`}
+                            >
+                                {isIncome ? "+" : "-"}₹{item.amount}
+                            </p>
+
+                        </div>
+                    );
+                })}
+
+            </div>
+
         </div>
     );
 };

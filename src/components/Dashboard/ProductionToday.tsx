@@ -29,7 +29,7 @@ export default function ProductionToday() {
     ];
 
     return (
-        <div className="bg-white rounded-xl shadow-md p-5 w-full hover:shadow-lg transition-shadow">
+        <div className="bg-white rounded-xl shadow-md p-5 w-full">
             <h2 className="text-lg font-semibold text-gray-800 mb-4">
                 Production Today
             </h2>
