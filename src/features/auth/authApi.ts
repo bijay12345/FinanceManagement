@@ -86,6 +86,7 @@ const login = async (email: string, password: string): Promise<InitiateAuthComma
             throw err;
         }
 
+        console.log(err);
         throw new Error("Failed to signup");
     }
 };
