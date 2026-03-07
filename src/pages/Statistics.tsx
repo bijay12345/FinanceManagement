@@ -1,6 +1,4 @@
 import ExpenseBreakdown from "../components/Dashboard/ExpenseBreakdown";
-import LivestockCard from "../components/Dashboard/LivestockCard";
-import LowStockAlerts from "../components/Dashboard/LowStockAlerts";
 import MonthlyProfit from "../components/Dashboard/MonthlyProfit";
 import RecentTransactions from "../components/Dashboard/RecentTransaction";
 import SalesOverview from "../components/Dashboard/SalesOverview";
@@ -27,13 +25,7 @@ const Statistics = () => {
           <div className="col-span-12 xl:col-span-4 space-y-6">
 
             <ExpenseBreakdown />
-
-            <LowStockAlerts />
-
             <MonthlyProfit />
-
-            <LivestockCard />
-
           </div>
 
         </div>

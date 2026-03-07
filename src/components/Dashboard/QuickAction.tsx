@@ -18,7 +18,7 @@ const actions = [
 
 const QuickAction = () => {
     return (
-        <div className="mb-6">
+        <div>
 
             <div className="flex flex-wrap gap-3 mt-3">
                 {actions.map((action, index) => (
